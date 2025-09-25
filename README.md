@@ -76,11 +76,11 @@ The benchmark tests hash performance on single-level paths (`"/abc"`) by:
 +-----------+-------------------+-----------------------+
 | Benchmark | single_level_path | single_level_path_new |
 +===========+===================+=======================+
-| bench     | 197 ms            | 137 ms: 1.44x faster  |
+| bench     | 268 ms            | 173 ms: 1.55x faster  |
 +-----------+-------------------+-----------------------+
 ```
 
-**Summary**: The optimized implementation shows a **1.44x performance improvement** (44% faster) for short single-level path hashing operations.
+**Summary**: The optimized implementation shows a **1.55x performance improvement** (55% faster) for short single-level path hashing operations.
 
 ### Long Single-Level Path Results
 
@@ -88,11 +88,11 @@ The benchmark tests hash performance on single-level paths (`"/abc"`) by:
 +-----------+------------------------+----------------------------+
 | Benchmark | long_single_level_path | long_single_level_path_new |
 +===========+========================+============================+
-| bench     | 241 ms                 | 180 ms: 1.34x faster       |
+| bench     | 314 ms                 | 214 ms: 1.46x faster       |
 +-----------+------------------------+----------------------------+
 ```
 
-**Summary**: The optimized implementation shows a **1.34x performance improvement** (34% faster) for long single-level path hashing operations.
+**Summary**: The optimized implementation shows a **1.46x performance improvement** (46% faster) for long single-level path hashing operations.
 
 ### Deep Path Results
 
@@ -100,11 +100,11 @@ The benchmark tests hash performance on single-level paths (`"/abc"`) by:
 +-----------+-----------+------------------------+
 | Benchmark | deep_path | deep_path_new          |
 +===========+===========+========================+
-| bench     | 1.19 sec  | 1.07 sec: 1.12x faster |
+| bench     | 1.19 sec  | 1.06 sec: 1.13x faster |
 +-----------+-----------+------------------------+
 ```
 
-**Summary**: The optimized implementation shows a **1.12x performance improvement** (12% faster) for 512-level deep path hashing operations.
+**Summary**: The optimized implementation shows a **1.13x performance improvement** (13% faster) for 512-level deep path hashing operations.
 
 ### Deep Long Path Results
 
@@ -112,23 +112,23 @@ The benchmark tests hash performance on single-level paths (`"/abc"`) by:
 +-----------+----------------+------------------------+
 | Benchmark | deep_long_path | deep_long_path_new     |
 +===========+================+========================+
-| bench     | 1.90 sec       | 2.02 sec: 1.06x slower |
+| bench     | 2.09 sec       | 2.13 sec: 1.02x slower |
 +-----------+----------------+------------------------+
 ```
 
-**Summary**: The optimized implementation shows a **1.06x performance regression** (6% slower) for 512-level deep paths with 10-character component names.
+**Summary**: The optimized implementation shows a **1.02x performance regression** (2% slower) for 512-level deep paths with 10-character component names.
 
 ### Operation Pattern Results
 
 Testing different operation patterns on short single-level paths (`/abc`):
 
-#### 1. hash(p) only - **1.44x faster** ✅
+#### 1. hash(p) only - **1.55x faster** ✅
 
 ```
 +-----------+-------------------+-----------------------+
 | Benchmark | single_level_path | single_level_path_new |
 +===========+===================+=======================+
-| bench     | 197 ms            | 137 ms: 1.44x faster  |
+| bench     | 268 ms            | 173 ms: 1.55x faster  |
 +-----------+-------------------+-----------------------+
 ```
 
@@ -138,23 +138,23 @@ Testing different operation patterns on short single-level paths (`/abc`):
 Benchmark hidden because not significant (1): bench
 ```
 
-#### 3. str(p); hash(p) - **1.12x faster** ❌ (Expected: Slower)
+#### 3. str(p); hash(p) - **1.18x faster** ✅
 
 ```
 +-----------+----------+----------------------+
 | Benchmark | str_hash | str_hash_new         |
 +===========+==========+======================+
-| bench     | 213 ms   | 190 ms: 1.12x faster |
+| bench     | 279 ms   | 236 ms: 1.18x faster |
 +-----------+----------+----------------------+
 ```
 
-#### 4. hash(p); str(p) - **1.06x faster** ❌ (Expected: Slower)
+#### 4. hash(p); str(p) - **1.15x faster** ✅
 
 ```
 +-----------+----------+----------------------+
 | Benchmark | hash_str | hash_str_new         |
 +===========+==========+======================+
-| bench     | 201 ms   | 189 ms: 1.06x faster |
+| bench     | 272 ms   | 237 ms: 1.15x faster |
 +-----------+----------+----------------------+
 ```
 
